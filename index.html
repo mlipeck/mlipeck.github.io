@@ -1,7 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+
+<head>
+    <meta charset="utf-8">
+    <title>mlipeck</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+</head>
+
+<style>
+        body,
+    html {
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Source Code Pro';
+    }
+
+    #info {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        font-size: 64px;
+        text-align: center;
+        line-height: 100vh;
+        animation: ani ease 2s infinite;
+    }
+
+    @keyframes ani {
+        0%,
+        100% {
+            font-size: 128px;
+            50% {
+                font-size: 64px;
+            }
+        }
+</style>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+
+    <div id="info">
+        <p>spacelab</p>
+    </div>
+
+    <canvas id="meinCanvas"></canvas>
+
+    <script>
+        var c = document.getElementById("meinCanvas");
+        var cx = c.getContext("2d");
+        var breite, hoehe;
+        var counter = 0;
+
+        function anpassen() {
+            c.width = breite = window.innerWidth;
+            c.height = hoehe = window.innerHeight;
+
+        }
+
+        anpassen();
+
+        window.onresize = function() {
+            anpassen();
+        }
+
+        function kreiseZeichnen() {
+            var x = Math.random() * breite;
+            var y = Math.random() * hoehe;
+
+            cx.beginPath();
+            cx.arc(x, y, Math.random() * 100 + 10, 0, Math.PI * 2);
+            //  cx.stroke();
+
+            cx.fillStyle = "hsla(" + counter + ",100%,50%,.2)";
+
+            counter++;
+
+            counter %= 360;
+
+            cx.fill();
+
+        }
+
+        setInterval(kreiseZeichnen, 10);
+    </script>
+
+
 </body>
+
+
 </html>
